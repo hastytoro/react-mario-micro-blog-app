@@ -40,7 +40,7 @@ callback function, you then need that inline arrow setup passing along event.
 `
 */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const initialState = [
@@ -72,7 +72,7 @@ component can destructure that property directly for use.
 */
 const Home = () => {
   const [blogs, setBlogs] = useState(initialState);
-
+  const [count, setCount] = useState(0);
   const filterList = (name) => blogs.filter((blog) => blog.author === name);
   // Below we flip the flag with `!` so any value that is `false` is truthy.
   // So we return all items in the array that don't match with the id.
@@ -80,8 +80,29 @@ const Home = () => {
     const newBlogs = blogs.filter((item) => item.id !== id);
     setBlogs(newBlogs);
   };
+  /* # Warning: Avoid `useEffect` infinite loops: 
+  Passing an empty dependency argument means that if you update any state in
+  the effect callback, its going to invoke infinitely. Because its updating
+  state that is re-rendering (update) the component, it keeps triggering.
+  After initial render, useEffect runs the side-effect callback that updates
+  ```jsx
+  useEffect(() => {
+    console.log("effect callback triggered");
+    setCount(count + 1);
+    console.log(count); // infinite
+  });
+  ```
+  the state. That triggers re-rendering that triggers another effect callback
+  and again updates state again etc.... The infinite loop is fixed by correct
+  management of the useEffect(callback, dependencies) dependencies argument. */
+  useEffect(() => {
+    console.log("effect callback triggered");
+    setCount(count + 1);
+    console.log(count);
+  }, []); // ok, we going to run on each mount only.
   return (
     <div className="home">
+      <h1>{count}</h1>
       <BlogList
         blogs={blogs}
         title="All the Blogs!"
