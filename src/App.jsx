@@ -16,12 +16,40 @@ the Babel transpiler needs our `props` to be in camel cased.
 > React v16+, we don't need to import `React` from 'react' for each component.
 */
 function App() {
-  const [count, setCount] = useState(0);
+  /* Dynamic values in our JSX syntax (templates): 
+  Using carly braces in our JSX, React knows we want to return dynamic values.
+  Now it does not matter if the values are of type number, React "Babel" behind
+  the scenes is going to convert all values strings within the client browser.
 
+  ! You can not output in your braces any type of object.
+  ! Error: Objects are not valid as a React child.
+
+  ```jsx
   return (
     <div className="App">
       <div className="content">
-        <h1>App Component</h1>
+        <h1>numbers {30}</h1>
+        <h1>string {"yoshi"}</h1>
+        <h1>boolean {false}</h1>
+        <h1>array {[1, 2, 3]}</h1>
+        <h1>object {{ name: "yoshi", age: 30 }}</h1> // ! problem here
+        <h1>math expression {Math.random() * 10}</h1>
+      </div>
+    </div>
+  );
+  ```
+  `
+  */
+  const person = { name: "yoshi", age: 30 };
+  return (
+    <div className="App">
+      <div className="content">
+        <h1>numbers {30}</h1>
+        <h1>string {"yoshi"}</h1>
+        <h1>boolean {false}</h1>
+        <h1>array {[1, 2, 3]}</h1>
+        {/* <h1>object {{ name: "yoshi", age: 30 }}</h1> // problem here! */}
+        <h1>math expression {Math.random() * 10}</h1>
       </div>
     </div>
   );
