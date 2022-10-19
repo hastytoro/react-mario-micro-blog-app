@@ -1,6 +1,5 @@
 import Home from "../components/Home";
 import NavBar from "../components/NavBar";
-import "./App.css";
 
 /* # App is our root component: 
 App is the root component in our React application. Its the first function that

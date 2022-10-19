@@ -1,27 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: "Quicksand";
+  /* font-size: 80%; */
+  /* dark mode: */
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
+  color: hsl(0, 0%, 10%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
 
-body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  place-items: center;
-  min-width: 320px;
+}
+
+body {
   min-height: 100vh;
+}
+
+a {
+  text-decoration-style: none;
+  color: inherit;
+}
+
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+  /* temp background */
+  background: rgba(173, 216, 230, 0.1);
+}
+#logo {
+  color: #f1356d;
+}
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+.navbar a:hover {
+  color: #f1356d;
+}
+
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  /* temp background */
+  background: rgba(240, 128, 128, 0.1);
 }

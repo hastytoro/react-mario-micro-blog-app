@@ -13,10 +13,10 @@ with which helps us in accessing the variables value. */
 const NavBar = () => {
   return (
     <nav className="navbar">
-      <h1>Logo</h1>
+      <h1 id="logo">Logo</h1>
       <div className="links">
         <a href="/">Home</a>
-        <a href="/create">New Blog</a>
+        <a href="/create">Post</a>
       </div>
     </nav>
   );
