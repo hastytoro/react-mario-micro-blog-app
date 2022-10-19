@@ -41,36 +41,44 @@ callback function, you then need that inline arrow setup passing along event.
 */
 
 import { useState } from "react";
+import BlogList from "./BlogList";
 
+const initialState = [
+  {
+    title: "Ciao ragazzi",
+    body: "lorem ipsum...",
+    author: "mario",
+    id: 1,
+  },
+  {
+    title: "Welcome guys",
+    body: "lorem ipsum...",
+    author: "yoshi",
+    id: 2,
+  },
+  {
+    title: "Get those stars",
+    body: "lorem ipsum...",
+    author: "mario",
+    id: 3,
+  },
+];
+
+/* # Props: 
+Its a way of providing read-only data/sate from a parent component to a wrapped
+child component, that it encloses over. Below we pass the state as a prop. Now
+the blogs array state is going to be accessible on the props object. The child
+component can destructure that property directly for use.
+*/
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    {
-      title: "Ciao ragazzi 🍄",
-      body: "lorem ipsum...",
-      author: "mario",
-      id: 1,
-    },
-    {
-      title: "Welcome guys 🐢",
-      body: "lorem ipsum...",
-      author: "yoshi",
-      id: 2,
-    },
-    {
-      title: "Get those stars ⭐️",
-      body: "lorem ipsum...",
-      author: "mario",
-      id: 3,
-    },
-  ]);
+  const [blogs, setBlogs] = useState(initialState);
   return (
     <div className="home">
-      {blogs.map(({ title, body, author, id }) => (
-        <div key={id} className="blog-preview">
-          <h2>{title}</h2>
-          <p>Written by: {author}</p>
-        </div>
-      ))}
+      <BlogList blogs={blogs} title="All Blogs!" />
+      <BlogList
+        blogs={blogs.filter((blog) => blog.author === "mario")}
+        title="Mario's Blogs!"
+      />
     </div>
   );
 };
