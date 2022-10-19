@@ -72,12 +72,25 @@ component can destructure that property directly for use.
 */
 const Home = () => {
   const [blogs, setBlogs] = useState(initialState);
+
+  const filterList = (name) => blogs.filter((blog) => blog.author === name);
+  // Below we flip the flag with `!` so any value that is `false` is truthy.
+  // So we return all items in the array that don't match with the id.
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter((item) => item.id !== id);
+    setBlogs(newBlogs);
+  };
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs!" />
       <BlogList
-        blogs={blogs.filter((blog) => blog.author === "mario")}
+        blogs={blogs}
+        title="All the Blogs!"
+        handleDelete={handleDelete}
+      />
+      <BlogList
+        blogs={filterList("mario")}
         title="Mario's Blogs!"
+        handleDelete={handleDelete}
       />
     </div>
   );

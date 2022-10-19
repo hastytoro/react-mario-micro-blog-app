@@ -16,7 +16,7 @@ const NavBar = () => {
       <h1 id="logo">Logo</h1>
       <div className="links">
         <a href="/">Home</a>
-        <a href="/create">Post</a>
+        <a href="/create">New Blog</a>
       </div>
     </nav>
   );
