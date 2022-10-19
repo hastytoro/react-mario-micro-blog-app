@@ -43,30 +43,34 @@ callback function, you then need that inline arrow setup passing along event.
 import { useState } from "react";
 
 const Home = () => {
-  // let name = "mario"; // Not reactive variable ❌
-  const [name, setName] = useState("mario 🍄"); // reactive variable ✅
-  const [age, setAge] = useState(25);
-  const handleClick = () => {
-    /* # You need reactive state management: 
-    The below does update the variable. React isn't reacting "😅" watching for
-    that change to occur, its not going to re-ender JSX with that change. When 
-    the value change, no trigger updates the template with the updated value. In
-    order for this to work we need the state value to be reactive. So that when
-    state changes React detects that and updates the template value. The modern
-    way of wiring this up is with state hooks `useState` 🪝. That returns two
-    value that we array destructure off to make use of.
-    */
-    // name = "luigi"; // Not reactive variable ❌
-    setName("luigi 🍄");
-    console.log(name);
-  };
+  const [blogs, setBlogs] = useState([
+    {
+      title: "Ciao ragazzi 🍄",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 1,
+    },
+    {
+      title: "Welcome guys 🐢",
+      body: "lorem ipsum...",
+      author: "yoshi",
+      id: 2,
+    },
+    {
+      title: "Get those stars ⭐️",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
+  ]);
   return (
     <div className="home">
-      <h2>Home page</h2>
-      <p>
-        {name} is {age}
-      </p>
-      <button onClick={handleClick}>Click me</button>
+      {blogs.map(({ title, body, author, id }) => (
+        <div key={id} className="blog-preview">
+          <h2>{title}</h2>
+          <p>Written by: {author}</p>
+        </div>
+      ))}
     </div>
   );
 };

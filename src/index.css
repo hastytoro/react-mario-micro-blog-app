@@ -2,7 +2,7 @@
 :root {
   /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
   font-family: "Quicksand";
-  /* font-size: 80%; */
+  font-size: 80%;
   /* dark mode: */
   /* color: rgba(255, 255, 255, 0.87); */
   /* background-color: #242424; */
@@ -35,7 +35,7 @@ a {
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
   /* temp background */
-  background: rgba(173, 216, 230, 0.1);
+  /* background: rgba(173, 216, 230, 0.1); */
 }
 #logo {
   color: #f1356d;
@@ -57,5 +57,21 @@ a {
   margin: 40px auto;
   padding: 20px;
   /* temp background */
-  background: rgba(240, 128, 128, 0.1);
+  /* background: rgba(240, 128, 128, 0.1); */
+}
+
+.blog-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s;
+}
+.blog-preview:hover {
+  scale: 1.1;
+}
+.blog-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
 }
