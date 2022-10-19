@@ -1,4 +1,4 @@
-/* Events and callback handlers: 
+/* # Events and callback handlers: 
 Most of the time your not going to invoke your callback reference straight away
 when your component render (mount) or re-render (update). Because that means the
 function call is going to occur automatically without any user interaction. You
@@ -40,14 +40,33 @@ callback function, you then need that inline arrow setup passing along event.
 `
 */
 
+import { useState } from "react";
+
 const Home = () => {
-  const handleClickOne = (e) => console.log(e);
-  const handleClickTwo = (name, e) => console.log(name, e.target);
+  // let name = "mario"; // Not reactive variable ❌
+  const [name, setName] = useState("mario 🍄"); // reactive variable ✅
+  const [age, setAge] = useState(25);
+  const handleClick = () => {
+    /* # You need reactive state management: 
+    The below does update the variable. React isn't reacting "😅" watching for
+    that change to occur, its not going to re-ender JSX with that change. When 
+    the value change, no trigger updates the template with the updated value. In
+    order for this to work we need the state value to be reactive. So that when
+    state changes React detects that and updates the template value. The modern
+    way of wiring this up is with state hooks `useState` 🪝. That returns two
+    value that we array destructure off to make use of.
+    */
+    // name = "luigi"; // Not reactive variable ❌
+    setName("luigi 🍄");
+    console.log(name);
+  };
   return (
     <div className="home">
       <h2>Home page</h2>
-      <button onClick={handleClickOne}>Click me</button>
-      <button onClick={(e) => handleClickTwo("james", e)}>Click me</button>
+      <p>
+        {name} is {age}
+      </p>
+      <button onClick={handleClick}>Click me</button>
     </div>
   );
 };
