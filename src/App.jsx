@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Home from "../components/Home";
+import NavBar from "../components/NavBar";
 import "./App.css";
 
 /* # App is our root component: 
@@ -42,14 +43,10 @@ function App() {
   */
   const person = { name: "yoshi", age: 30 };
   return (
-    <div className="App">
+    <div className="wrapper">
+      <NavBar />
       <div className="content">
-        <h1>numbers {30}</h1>
-        <h1>string {"yoshi"}</h1>
-        <h1>boolean {false}</h1>
-        <h1>array {[1, 2, 3]}</h1>
-        {/* <h1>object {{ name: "yoshi", age: 30 }}</h1> // problem here! */}
-        <h1>math expression {Math.random() * 10}</h1>
+        <Home />
       </div>
     </div>
   );
