@@ -54,8 +54,9 @@ component can destructure that property directly for use.
 const Home = () => {
   const [blogs, setBlogs] = useState(initialState);
   const [count, setCount] = useState(0);
-  const filterList = (name) => blogs.filter((blog) => blog.author === name);
+  const [isPending, setIsPending] = useState(true);
 
+  const filterList = (name) => blogs.filter((blog) => blog.author === name);
   /* # Warning: Avoid `useEffect` infinite loops: 
   Passing an empty dependency argument means that if you update any state in
   the effect callback, its going to invoke infinitely. Because its updating
@@ -72,9 +73,13 @@ const Home = () => {
   and again updates state again etc.... The infinite loop is fixed by correct
   management of the useEffect(callback, dependencies) dependencies argument. */
   useEffect(() => {
-    fetch("http://localhost:8000/blogs")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data));
+    // Here we simulate the side-effect:
+    setTimeout(() => {
+      fetch("http://localhost:8000/blogs")
+        .then((res) => res.json())
+        .then((data) => setBlogs(data));
+      setIsPending(false);
+    }, 1000);
     setCount(count + 1);
     console.log("iteration count in effect callback", count);
   }, []); // ok, we going to run on each mount only.
@@ -86,6 +91,7 @@ const Home = () => {
       It works because in JS, true && expression always evaluates the expression
       but if false on the left side, then the expression always evaluate false.
       And does not even bother with the right-side of the evaluation. */}
+      {isPending && <h3>Loading...</h3>}
       {blogs && (
         <>
           <BlogList blogs={blogs} title="All the Blogs!" />
