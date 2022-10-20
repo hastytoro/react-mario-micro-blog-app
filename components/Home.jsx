@@ -39,11 +39,8 @@ But if you need to pass in arguments and that is likely the setup needed in most
 callback function, you then need that inline arrow setup passing along event.
 `
 */
-
-import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
-
-const initialState = null;
+import useFetch from "../src/hooks/useFetch";
 
 /* # Props: 
 Its a way of providing read-only data/sate from a parent component to a wrapped
@@ -52,53 +49,11 @@ the blogs array state is going to be accessible on the props object. The child
 component can destructure that property directly for use.
 */
 const Home = () => {
-  const [blogs, setBlogs] = useState(initialState);
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  // const {data: blogs, loading, error} = useFetch("http://localhost:8000/blogs");
+  const [blogs, loading, error] = useFetch("http://localhost:8000/blogs");
   const filterList = (name) => blogs.filter((blog) => blog.author === name);
-  /* # Warning: Avoid `useEffect` infinite loops: 
-  Passing an empty dependency argument means that if you update any state in
-  the effect callback, its going to invoke infinitely. Because its updating
-  state that is re-rendering (update) the component, it keeps triggering.
-  After initial render, useEffect runs the side-effect callback that updates
-  ```jsx
-  useEffect(() => {
-    console.log("effect callback triggered");
-    setCount(count + 1);
-    console.log(count); // infinite
-  });
-  ```
-  the state. That triggers re-rendering that triggers another effect callback
-  and again updates state again etc.... The infinite loop is fixed by correct
-  management of the useEffect(callback, dependencies) dependencies argument. */
-  useEffect(() => {
-    // Here we simulate the side-effect:
-    setTimeout(() => {
-      fetch("http://localhost:8000/blogss")
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("could not fetch the data from server");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setBlogs(data);
-          setLoading(false);
-          setError(null);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setLoading(false);
-        });
-    }, 1000);
-    setCount(count + 1);
-  }, []);
-
   return (
     <div className="home">
-      <h1>Render amount: {count} (temp)</h1>
       {/* Below we condition render/template with a JS && AND logical operator.
       It works because in JS, true && expression always evaluates the expression
       but if false on the left side, then the expression always evaluate false.
