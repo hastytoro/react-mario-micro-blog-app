@@ -60,12 +60,18 @@ a {
   /* background: rgba(240, 128, 128, 0.1); */
 }
 
+.blog-list {
+  padding-top: 2rem;
+}
+
 .blog-preview {
+  position: relative;
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.25s;
+  border-radius: 0.5rem;
 }
 .blog-preview:hover {
   scale: 1.1;
@@ -74,8 +80,4 @@ a {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 8px;
-}
-
-.blog-list {
-  padding-top: 2rem;
 }
