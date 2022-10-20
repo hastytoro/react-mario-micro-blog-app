@@ -54,7 +54,8 @@ component can destructure that property directly for use.
 const Home = () => {
   const [blogs, setBlogs] = useState(initialState);
   const [count, setCount] = useState(0);
-  const [isPending, setIsPending] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const filterList = (name) => blogs.filter((blog) => blog.author === name);
   /* # Warning: Avoid `useEffect` infinite loops: 
@@ -75,15 +76,26 @@ const Home = () => {
   useEffect(() => {
     // Here we simulate the side-effect:
     setTimeout(() => {
-      fetch("http://localhost:8000/blogs")
-        .then((res) => res.json())
-        .then((data) => setBlogs(data));
-      setIsPending(false);
+      fetch("http://localhost:8000/blogss")
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("could not fetch the data from server");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setBlogs(data);
+          setLoading(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
     }, 1000);
     setCount(count + 1);
-    console.log("iteration count in effect callback", count);
-  }, []); // ok, we going to run on each mount only.
-  console.log("state: ", blogs);
+  }, []);
+
   return (
     <div className="home">
       <h1>Render amount: {count} (temp)</h1>
@@ -91,7 +103,8 @@ const Home = () => {
       It works because in JS, true && expression always evaluates the expression
       but if false on the left side, then the expression always evaluate false.
       And does not even bother with the right-side of the evaluation. */}
-      {isPending && <h3>Loading...</h3>}
+      {error && <h3>Error: {error}</h3>}
+      {loading && <h3>Loading...</h3>}
       {blogs && (
         <>
           <BlogList blogs={blogs} title="All the Blogs!" />
