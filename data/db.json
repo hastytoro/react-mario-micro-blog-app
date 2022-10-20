@@ -1,0 +1,29 @@
+{
+  "blogs": [
+    {
+      "title": "Ciao ragazzi",
+      "body": "lorem ipsum...",
+      "author": "mario",
+      "id": 1
+    },
+    {
+      "title": "Welcome guys",
+      "body": "lorem ipsum...",
+      "author": "yoshi",
+      "id": 2
+    },
+    {
+      "title": "Get those stars",
+      "body": "lorem ipsum...",
+      "author": "mario",
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "_comment1": "Run the following from the root of your project folder: ",
+      "_comment2": "npx json-server --watch data/db.json --port 8000",
+      "_comment3": "Now `data/db.json` is wrapped by json-server API endpoints"
+    }
+  ]
+}

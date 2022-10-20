@@ -60,7 +60,12 @@ a {
   /* background: rgba(240, 128, 128, 0.1); */
 }
 
+.blog-list {
+  padding-top: 2rem;
+}
+
 .blog-preview {
+  position: relative;
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
@@ -75,7 +80,19 @@ a {
   color: #f1356d;
   margin-bottom: 8px;
 }
-
-.blog-list {
-  padding-top: 2rem;
+.blog-preview button {
+  padding: 0.5rem 1rem;
+  background: #f1356dce;
+  border: #f1356d 1px solid;
+  border-radius: 1rem;
+  color: white;
+  position: absolute;
+  top: 20%;
+  right: -2%;
+  font-size: 0.8rem;
+  font-weight: bolder;
+  transition: all 0.55s;
+}
+.blog-preview button:hover {
+  box-shadow: 0px 2px 14px rgba(241, 53, 109, 0.5);
 }

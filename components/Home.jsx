@@ -43,26 +43,7 @@ callback function, you then need that inline arrow setup passing along event.
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
-const initialState = [
-  {
-    title: "Ciao ragazzi",
-    body: "lorem ipsum...",
-    author: "mario",
-    id: 1,
-  },
-  {
-    title: "Welcome guys",
-    body: "lorem ipsum...",
-    author: "yoshi",
-    id: 2,
-  },
-  {
-    title: "Get those stars",
-    body: "lorem ipsum...",
-    author: "mario",
-    id: 3,
-  },
-];
+const initialState = null;
 
 /* # Props: 
 Its a way of providing read-only data/sate from a parent component to a wrapped
@@ -96,23 +77,34 @@ const Home = () => {
   and again updates state again etc.... The infinite loop is fixed by correct
   management of the useEffect(callback, dependencies) dependencies argument. */
   useEffect(() => {
-    console.log("effect callback triggered");
+    fetch("http://localhost:8000/blogs")
+      .then((res) => res.json())
+      .then((data) => setBlogs(data));
     setCount(count + 1);
-    console.log(count);
+    console.log("iteration count in effect callback", count);
   }, []); // ok, we going to run on each mount only.
+  console.log("state: ", blogs);
   return (
     <div className="home">
-      <h1>{count}</h1>
-      <BlogList
-        blogs={blogs}
-        title="All the Blogs!"
-        handleDelete={handleDelete}
-      />
-      <BlogList
-        blogs={filterList("mario")}
-        title="Mario's Blogs!"
-        handleDelete={handleDelete}
-      />
+      <h1>Render amount: {count} (temp)</h1>
+      {/* Below we condition render/template with a JS && AND logical operator.
+      It works because in JS, true && expression always evaluates the expression
+      but if false on the left side, then the expression always evaluate false.
+      And does not even bother with the right-side of the evaluation. */}
+      {blogs && (
+        <>
+          <BlogList
+            blogs={blogs}
+            title="All the Blogs!"
+            handleDelete={handleDelete}
+          />
+          <BlogList
+            blogs={filterList("mario")}
+            title="Mario's Blogs!"
+            handleDelete={handleDelete}
+          />
+        </>
+      )}
     </div>
   );
 };

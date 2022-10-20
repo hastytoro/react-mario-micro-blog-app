@@ -40,7 +40,6 @@ function App() {
   ```
   `
   */
-  const person = { name: "yoshi", age: 30 };
   return (
     <div className="wrapper">
       <NavBar />
