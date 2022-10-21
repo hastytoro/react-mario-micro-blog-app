@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("luigi");
   const [pending, setPending] = useState(false);
+  const history = useHistory();
+
   /* # Listening for form events: 
   You have two options available either you listen for a event on the parenting
   <form> element via the onSubmit event. Or you can have this reside within it,
@@ -21,6 +24,7 @@ const Create = () => {
     }).then(() => {
       setPending(false);
       console.log("new blog added successfully ");
+      history.push("/");
     });
   };
   return (
