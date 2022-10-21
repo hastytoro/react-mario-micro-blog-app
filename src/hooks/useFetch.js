@@ -47,10 +47,14 @@ export default function useFetch(endpoint) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
+    // A controller object that allows you to abort one or more DOM requests as
+    // and when desired. We going to associate it with our fetch two option.
+    const abortController = new AbortController();
     // Here we simulate the side-effect:
     setTimeout(() => {
-      fetch(endpoint)
+      fetch(endpoint, { signal: abortController.signal })
         .then((res) => {
           if (!res.ok) {
             throw Error("could not fetch data from server!");
@@ -63,9 +67,12 @@ export default function useFetch(endpoint) {
           setError(null);
         })
         .catch((err) => {
+          if (error.name === "AboutError") console.log("fetch API aborted");
           setError(err.message);
           setLoading(false);
         });
+      // We setup a cleanup 🧼, that aborts whatever is associated with fetch.
+      return () => abortController.abort();
     }, 1000);
   }, [endpoint]);
   // You can return either object our array to destructure:
