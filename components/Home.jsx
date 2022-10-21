@@ -50,6 +50,7 @@ component can destructure that property directly for use.
 */
 const Home = () => {
   // const {data: blogs, loading, error} = useFetch("http://localhost:8000/blogs");
+  // *CRUD: read a (GET) request:
   const [blogs, loading, error] = useFetch("http://localhost:8000/blogs");
   return (
     <div className="home">
