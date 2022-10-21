@@ -60,10 +60,6 @@ a {
   /* background: rgba(240, 128, 128, 0.1); */
 }
 
-.blog-list {
-  padding-top: 2rem;
-}
-
 .blog-preview {
   position: relative;
   padding: 10px 16px;
@@ -100,4 +96,51 @@ a {
   border: 0;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+/* create new blog form */
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.create label {
+  text-align: left;
+  display: block;
+}
+.create h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 30px;
+}
+.create input,
+.create textarea,
+.create select {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 200;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+  display: block;
+}
+.create button {
+  background: hsla(342, 87%, 58%, 0.8);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: bold;
+  box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.1);
+  transition: all 0.35s;
+}
+.create button:hover {
+  font-size: 1rem;
+  background: hsla(342, 87%, 58%, 1);
+  box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.1);
 }

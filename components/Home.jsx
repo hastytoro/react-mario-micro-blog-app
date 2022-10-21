@@ -51,7 +51,6 @@ component can destructure that property directly for use.
 const Home = () => {
   // const {data: blogs, loading, error} = useFetch("http://localhost:8000/blogs");
   const [blogs, loading, error] = useFetch("http://localhost:8000/blogs");
-  const filterList = (name) => blogs.filter((blog) => blog.author === name);
   return (
     <div className="home">
       {/* Below we condition render/template with a JS && AND logical operator.
@@ -63,7 +62,6 @@ const Home = () => {
       {blogs && (
         <>
           <BlogList blogs={blogs} title="All the Blogs!" />
-          <BlogList blogs={filterList("mario")} title="Mario's Blogs!" />
         </>
       )}
     </div>
